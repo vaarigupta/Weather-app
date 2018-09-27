@@ -1,33 +1,54 @@
-const request = require('request');
+// const request = require('request');
 
-const yargs = require('yargs');
-const geocode = require('./geocode/geocode.js');
-const argv = yargs
-   .options({
-   	a :
-	   	{
-		   	alias:'address',
-		   	demand : true,
-		   	describe:'finding location for the given address'
-	    }
-			}
-   	).alias('h','help')
-.argv;
+// const yargs = require('yargs');
+// const geocode = require('./geocode/geocode.js');
+// const argv = yargs
+//    .options({
+//    	a :
+// 	   	{
+// 		   	alias:'address',
+// 		   	demand : true,
+// 		   	describe:'finding location for the given address'
+// 	    }
+// 			}
+//    	).alias('h','help')
+// .argv;
 
-//console.log(argv);
-//console.log(process)
+// //console.log(argv);
+// //console.log(process)
 
-geocode.geocodeAddress(argv.a,(errorMessage ,result)=>{
-	if(errorMessage)
-	{
-		console.log(errorMessage);
-	}
-	else
-	{
-		console.log(JSON.stringify(result,undefined,2));
-	}
+// geocode.geocodeAddress(argv.a,(errorMessage ,result)=>{
+// 	if(errorMessage)
+// 	{
+// 		console.log(errorMessage);
+// 	}
+// 	else
+// 	{
+// 		console.log(JSON.stringify(result,undefined,2));
+// 	}
 
-});
+// });
+
+
+var request = require("request");
+
+request({
+	url:"https://api.darksky.net/forecast/5da9efc326a46e965bedb46e9744fae6/37.09024,-95.712891",
+	json:true
+},(error, response,body)=>{
+	//console.log(JSON.stringify(body,undefined,3));
+	console.log(`Temperature - ${body.currently.temperature}`);
+	console.log(`Humidity - ${body.currently.humidity}`);
+	console.log(`Pressure - ${body.currently.pressure}`);
+
+
+})
+
+
+//api key -  5da9efc326a46e965bedb46e9744fae6
+
+
+
 
 
 // var encodedURL = encodeURIComponent(argv.a)
