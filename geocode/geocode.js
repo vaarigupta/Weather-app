@@ -1,8 +1,7 @@
 
 const request = require('request');
-var geocodeAddress = (address)=>
+var geocodeAddress = (address , callback)=>
 {
-
 
 var encodedURL = encodeURIComponent(address);
 
@@ -16,18 +15,22 @@ request({
   //console.log(body)
   if(error)
   {
-    console.log("Oops !! Unable to connect with google server ");
-    console.log("please Check URL or your internet connection");
+    callback("Oops !! Unable to connect with google server ",undefined);
+    callback("please Check URL or your internet connection",undefined);
   }
   else if(body.status === 'ZERO_RESULTS')
   {
-    console.log("Oops !! Unable to find location for this address")
+    callback("Oops !! Unable to find location for this address",undefined);
   }
   else if(body.status==='OK')
   {
-    console.log(`Address : ${body.results[0].formatted_address}`); // Print the HTML for the Google homepage.
-    console.log(`Longitude : ${body.results[0].geometry.location.lat}`);
-    console.log(`Latitude : ${body.results[0].geometry.location.lng}`);
+    callback(undefined,{
+
+      Address: body.results[0].formatted_address,
+      Longitude : body.results[0].geometry.location.lat,
+      Latitude : body.results[0].geometry.location.lng
+
+    })
   }
   else
   {
