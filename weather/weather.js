@@ -1,6 +1,6 @@
 var request = require("request");
 
-var getWeather = (longitude,latitude)=>{
+var getWeather = (longitude,latitude,callback)=>{
 
 
 	request({
@@ -12,21 +12,22 @@ var getWeather = (longitude,latitude)=>{
 	{
 		///its is system related error where server is involved and its not 
 		///responding and we cannot reach to the server due to internet conncetion or wrong url
-		console.log("Oops !!! Unable to connect with server");
+		callback("Oops !!! Unable to connect with server",undefined);
 	}
 	else if(response.statusCode === 400)
 	{
 
 		///user makes a mistake while fetching location  like 
 		// enter wrong location parameters
-       console.log("Oops !!! Unable to fetch weather ");
+       callback("Oops !!! Unable to fetch weather ",undefined);
 	}
 	else if (!error && response.statusCode === 200) 
 	{
-    console.log(`Temperature - ${body.currently.temperature}`);
-	console.log(`Humidity - ${body.currently.humidity}`);
-	console.log(`Pressure - ${body.currently.pressure}`);
-
+		callback(undefined,{
+			temperature:body.currently.temperature,
+			apparentTemp:body.currently.apparentTemperature
+		})
+    
 
 	}
 	

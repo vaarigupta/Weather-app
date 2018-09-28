@@ -28,7 +28,17 @@ geocode.geocodeAddress(argv.a,(errorMessage ,result)=>{
 		var long = result.longitude;
 		var lat = result.latitude;
 		
-		weather.getWeather(long,lat);
+		weather.getWeather(long,lat,(errorMessage,weatherResults)=>{
+			if(errorMessage)
+			{
+				console.log(errorMessage);
+			}
+			else
+			{   console.log(`Location : ${result.address}`)
+				console.log(`It's temperature is ${weatherResults.temperature} but it feels like ${weatherResults.apparentTemp}`)
+			}
+
+		});
 	}
 
 });
