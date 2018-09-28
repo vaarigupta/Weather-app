@@ -1,70 +1,77 @@
-// const request = require('request');
+const request = require('request');
 
-// const yargs = require('yargs');
-// const geocode = require('./geocode/geocode.js');
-// const argv = yargs
-//    .options({
-//    	a :
-// 	   	{
-// 		   	alias:'address',
-// 		   	demand : true,
-// 		   	describe:'finding location for the given address'
-// 	    }
-// 			}
-//    	).alias('h','help')
-// .argv;
+const yargs = require('yargs');
+const geocode = require('./geocode/geocode.js');
+const weather = require('./weather/weather.js');
+const argv = yargs
+   .options({
+   	a :
+	   	{
+		   	alias:'address',
+		   	demand : true,
+		   	describe:'finding location for the given address'
+	    }
+			}
+   	).alias('h','help')
+.argv;
 
-// //console.log(argv);
-// //console.log(process)
+//console.log(argv);
+//console.log(process)
 
-// geocode.geocodeAddress(argv.a,(errorMessage ,result)=>{
-// 	if(errorMessage)
-// 	{
-// 		console.log(errorMessage);
-// 	}
-// 	else
-// 	{
-// 		console.log(JSON.stringify(result,undefined,2));
-// 	}
-
-// });
-
-
-var request = require("request");
-
-request({
-	url:"https://api.darksky.net/forecast/5da9efc326a46e965bedb46e9744fae6/37.09024,-95.712891",
-	json:true
-},(error, response,body)=>{
-	//console.log(JSON.stringify(body,undefined,3));
-	if(error)
+geocode.geocodeAddress(argv.a,(errorMessage ,result)=>{
+	if(errorMessage)
 	{
-		///its is system related error where server is involved and its not 
-		///responding and we cannot reach to the server due to internet conncetion or wrong url
-		console.log("Oops !!! Unable to connect with server");
+		console.log(errorMessage);
 	}
-	else if(response.statusCode === 400)
+	if(result)
 	{
-
-		///user makes a mistake while fetching location  like 
-		// enter wrong location parameters
-       console.log("Oops !!! Unable to fetch weather ");
+		var long = result.longitude;
+		var lat = result.latitude;
+		
+		weather.getWeather(long,lat);
 	}
-	else if (!error && response.statusCode === 200) 
-	{
-    console.log(`Temperature - ${body.currently.temperature}`);
-	console.log(`Humidity - ${body.currently.humidity}`);
-	console.log(`Pressure - ${body.currently.pressure}`);
+
+});
 
 
-	}
-	
 
 
-})
+
 
 
 //api key -  5da9efc326a46e965bedb46e9744fae6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

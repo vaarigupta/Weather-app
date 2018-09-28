@@ -26,15 +26,15 @@ request({
   {
     callback(undefined,{
 
-      Address: body.results[0].formatted_address,
-      Longitude : body.results[0].geometry.location.lat,
-      Latitude : body.results[0].geometry.location.lng
+      address: body.results[0].formatted_address,
+      longitude : body.results[0].geometry.location.lat,
+      latitude : body.results[0].geometry.location.lng
 
     })
   }
   else
   {
-    console.log("Oops!!!!!!!!!!");
+    console.log("Oops!!");
   }
  
 })
