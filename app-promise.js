@@ -36,9 +36,15 @@ axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodedUR
        throw new Error("Oops !!! Unable to fetch weather ",undefined);
 	}
 
-	var temperature = response.data.currently.temperature;
+	else if (response.data.code === 200)
+	{
+
+		var temperature = response.data.currently.temperature;
     var apparentTemperature = response.data.currently.apparentTemperature;
     console.log(`The actual temperature is ${temperature} but it feels like ${apparentTemperature}`);
+	}
+
+	
 
 }).catch((errorMsg)=>{
 	  if(errorMsg.code=== 'ECONNREFUSED')
