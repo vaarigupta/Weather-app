@@ -52,8 +52,8 @@ var asyncAdd = (a,b)=>
 // });
 
 
-///catch method is used to for calling a callback function 
-///for any of the rejection occurred in th promise 
+///catch method is used for calling a callback function 
+///for any of the rejection occurred in the promise 
 /// it collects the rejection occurred in any of the then () method , 
 /// does not allow to execute the further then method as we expected in chaining of promises
 
